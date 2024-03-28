@@ -1,10 +1,11 @@
-import 'package:designcode/model/course.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
+import '../../model/course.dart';
 
 class RecentCourseCard extends StatelessWidget {
-  RecentCourseCard({this.course});
+  RecentCourseCard({required this.course});
 
   Course course;
 
@@ -80,7 +81,7 @@ class RecentCourseCard extends StatelessWidget {
           child: Container(
             child: Hero(
               child: Image.asset('asset/logos/${course.logo}'),
-              tag: course.logo,
+              tag: course.logo!,
             ),
             width: 60.0,
             height: 60.0,

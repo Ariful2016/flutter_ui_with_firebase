@@ -14,7 +14,7 @@ class _CertificateViewerState extends State<CertificateViewer> {
     'asset/certificates/certificate-03.png',
   ];
 
-  Widget certificateViewer;
+  late Widget certificateViewer;
 
   @override
   void initState() {

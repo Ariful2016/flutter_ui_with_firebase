@@ -1,10 +1,10 @@
-import 'package:designcode/model/course.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
+import '../../model/course.dart';
 
 class CourseSectionCard extends StatelessWidget {
-  CourseSectionCard({@required this.course});
+  CourseSectionCard({required this.course});
 
   final Course course;
 

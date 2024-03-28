@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class Course {
   Course({
-    this.courseTitle,
-    this.courseSubtitle,
-    this.background,
-    this.illustration,
+    required this.courseTitle,
+    required this.courseSubtitle,
+    required this.background,
+    required this.illustration,
     this.logo,
   });
 
@@ -13,7 +13,7 @@ class Course {
   String courseSubtitle;
   LinearGradient background;
   String illustration;
-  String logo;
+  String? logo;
 }
 
 // Recent Courses

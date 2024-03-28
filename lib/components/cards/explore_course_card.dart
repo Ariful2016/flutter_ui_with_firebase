@@ -1,38 +1,11 @@
-import 'package:designcode/model/course.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-
 import '../../constants.dart';
+import '../../model/course.dart';
 
-class ExploreCourseCard extends StatefulWidget {
-  ExploreCourseCard({@required this.course});
+class ExploreCourseCard extends StatelessWidget {
+  ExploreCourseCard({required this.course});
 
   final Course course;
-
-  @override
-  _ExploreCourseCardState createState() => _ExploreCourseCardState();
-}
-
-class _ExploreCourseCardState extends State<ExploreCourseCard> {
-  final _storage = FirebaseStorage.instance;
-  String illustrationURL;
-
-  @override
-  void initState() {
-    super.initState();
-    getIllustration();
-  }
-
-  void getIllustration() {
-    _storage
-        .ref("illustrations/${widget.course.illustration}")
-        .getDownloadURL()
-        .then((url) {
-      setState(() {
-        illustrationURL = url;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +16,7 @@ class _ExploreCourseCardState extends State<ExploreCourseCard> {
         child: Container(
           height: 120.0,
           width: 280.0,
-          decoration: BoxDecoration(gradient: widget.course.background),
+          decoration: BoxDecoration(gradient: course.background),
           child: Padding(
             padding: EdgeInsets.only(left: 32.0),
             child: Row(
@@ -54,15 +27,13 @@ class _ExploreCourseCardState extends State<ExploreCourseCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.course.courseSubtitle,
+                        course.courseSubtitle,
                         style: kCardSubtitleStyle,
                       ),
                       SizedBox(height: 6.0),
                       Text(
-                        widget.course.courseTitle,
+                        course.courseTitle,
                         style: kCardTitleStyle,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -70,13 +41,8 @@ class _ExploreCourseCardState extends State<ExploreCourseCard> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    (illustrationURL == null)
-                        ? Container()
-                        : Image.network(
-                            illustrationURL,
-                            fit: BoxFit.cover,
-                            height: 100.0,
-                          )
+                    Image.asset('asset/illustrations/${course.illustration}',
+                        fit: BoxFit.cover, height: 100.0)
                   ],
                 )
               ],

@@ -1,17 +1,17 @@
 import 'dart:io';
 
-import 'package:designcode/model/course.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../constants.dart';
+import '../model/course.dart';
 import 'course_sections_screen.dart';
 
 class CourseScreen extends StatefulWidget {
   CourseScreen({this.course});
 
-  final Course course;
+  final Course? course;
 
   @override
   _CourseScreenState createState() => _CourseScreenState();
@@ -38,7 +38,7 @@ class _CourseScreenState extends State<CourseScreen> {
     );
   }
 
-  PanelController panelController;
+  PanelController? panelController;
 
   @override
   void initState() {
@@ -72,15 +72,14 @@ class _CourseScreenState extends State<CourseScreen> {
             child: Column(
               children: [
                 Stack(
-                  alignment: Alignment.bottomRight,
-                  overflow: Overflow.clip,
+                  clipBehavior: Clip.hardEdge, alignment: Alignment.bottomRight,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(bottom: 20.0),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.5,
                         decoration:
-                            BoxDecoration(gradient: widget.course.background),
+                        BoxDecoration(gradient: widget.course?.background),
                       ),
                     ),
                     Container(
@@ -104,12 +103,12 @@ class _CourseScreenState extends State<CourseScreen> {
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
-                                              BorderRadius.circular(18.0)),
+                                          BorderRadius.circular(18.0)),
                                       child: Hero(
                                         child: Image.asset(
-                                          'asset/logos/${widget.course.logo}',
+                                          'asset/logos/${widget.course?.logo}',
                                         ),
-                                        tag: widget.course.logo,
+                                        tag: widget.course!.logo!,
                                       ),
                                     ),
                                     SizedBox(
@@ -118,21 +117,21 @@ class _CourseScreenState extends State<CourseScreen> {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Hero(
-                                            tag: widget.course.courseSubtitle,
+                                            tag: widget.course!.courseSubtitle,
                                             child: Text(
-                                              widget.course.courseSubtitle,
+                                              widget.course!.courseSubtitle,
                                               style: kSecondaryCalloutLabelStyle
                                                   .copyWith(
-                                                      color: Colors.white70),
+                                                  color: Colors.white70),
                                             ),
                                           ),
                                           Hero(
-                                            tag: widget.course.courseTitle,
+                                            tag: widget.course!.courseTitle,
                                             child: Text(
-                                              widget.course.courseTitle,
+                                              widget.course!.courseTitle,
                                               style: kLargeTitleStyle.copyWith(
                                                   color: Colors.white),
                                             ),
@@ -149,7 +148,7 @@ class _CourseScreenState extends State<CourseScreen> {
                                         height: 36.0,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(12.0),
+                                          BorderRadius.circular(12.0),
                                           color: kPrimaryLabelColor
                                               .withOpacity(0.8),
                                         ),
@@ -165,9 +164,9 @@ class _CourseScreenState extends State<CourseScreen> {
                               ),
                               Expanded(
                                 child: Hero(
-                                  tag: widget.course.illustration,
+                                  tag: widget.course!.illustration,
                                   child: Image.asset(
-                                    'asset/illustrations/${widget.course.illustration}',
+                                    'asset/illustrations/${widget.course!.illustration}',
                                     fit: BoxFit.cover,
                                     alignment: Alignment.topCenter,
                                     width: MediaQuery.of(context).size.width,
@@ -241,7 +240,7 @@ class _CourseScreenState extends State<CourseScreen> {
                             height: 58.0,
                             width: 58.0,
                             decoration: BoxDecoration(
-                              gradient: widget.course.background,
+                              gradient: widget.course!.background,
                               borderRadius: BorderRadius.circular(29.0),
                             ),
                           ),
@@ -287,7 +286,7 @@ class _CourseScreenState extends State<CourseScreen> {
                             height: 58.0,
                             width: 58.0,
                             decoration: BoxDecoration(
-                              gradient: widget.course.background,
+                              gradient: widget.course!.background,
                               borderRadius: BorderRadius.circular(29.0),
                             ),
                           ),
@@ -312,14 +311,14 @@ class _CourseScreenState extends State<CourseScreen> {
                 ),
                 Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 28.0, vertical: 24.0),
+                  EdgeInsets.symmetric(horizontal: 28.0, vertical: 24.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       indicators(),
                       GestureDetector(
                         onTap: () {
-                          panelController.open();
+                          panelController?.open();
                         },
                         child: Container(
                           alignment: Alignment.center,

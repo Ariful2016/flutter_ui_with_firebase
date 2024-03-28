@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:designcode/model/course.dart';
 import '../../constants.dart';
+import '../../model/course.dart';
 
 class CompletedCoursesCard extends StatelessWidget {
-  CompletedCoursesCard({this.course});
+  CompletedCoursesCard({required this.course});
 
   final Course course;
 

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SidebarItem {
-  SidebarItem({this.title, this.background, this.icon});
+  SidebarItem({required this.title, required this.background, required this.icon});
 
   String title;
   LinearGradient background;

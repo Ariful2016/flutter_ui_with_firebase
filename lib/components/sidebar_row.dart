@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class SidebarRow extends StatelessWidget {
   SidebarRow({@required this.item});
 
-  final SidebarItem item;
+  final SidebarItem? item;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class SidebarRow extends StatelessWidget {
             padding: EdgeInsets.all(10.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(14.0),
-                gradient: item.background),
-            child: item.icon),
+                gradient: item?.background),
+            child: item?.icon),
         SizedBox(width: 12),
         Container(
           child: Text(
-            item.title,
+            item!.title,
             style: kCalloutLabelStyle,
           ),
         ),

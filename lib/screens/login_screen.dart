@@ -10,15 +10,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String email;
-  String password;
+  String? email;
+  String? password;
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  Future<void> createNewUserData() {
-    _firestore.collection('users').doc(_auth.currentUser.uid).set({
+  Future<void> createNewUserData() async {
+    await _firestore.collection('users').doc(_auth.currentUser?.uid).set({
       'name': 'User',
-      'uid': _auth.currentUser.uid,
+      'uid': _auth.currentUser?.uid,
       'bio': 'Design+Code student',
       'completed': [],
       'recents': [],
@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               onTap: () async {
                                 try {
                                   await _auth.signInWithEmailAndPassword(
-                                      email: email, password: password);
+                                      email: email!, password: password!);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -190,10 +190,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     try {
                                       await _auth
                                           .createUserWithEmailAndPassword(
-                                              email: email, password: password)
+                                              email: email!,
+                                              password: password!)
                                           .then(
                                         (user) {
-                                          user.user.sendEmailVerification();
+                                          user.user?.sendEmailVerification();
                                           createNewUserData();
                                           Navigator.push(
                                             context,
@@ -212,13 +213,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (context) {
                                         return AlertDialog(
                                           title: Text("Error"),
-                                          content: Text(err.message),
+                                          content: Text(err.message!),
                                           actions: [
-                                            FlatButton(
-                                              onPressed: () {
+                                            GestureDetector(
+                                              onTap: () {
                                                 Navigator.of(context).pop();
                                               },
-                                              child: Text("Ok!"),
+                                              child: Container(
+                                                width: 30,
+                                                height: 30,
+                                                child: Text("Ok!"),
+                                              ),
                                             ),
                                           ],
                                         );
@@ -255,7 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         GestureDetector(
                           onTap: () {
                             _auth
-                                .sendPasswordResetEmail(email: email)
+                                .sendPasswordResetEmail(email: email!)
                                 .then((value) => {
                                       showDialog(
                                         context: context,
@@ -265,11 +270,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                             content: Text(
                                                 "The password reset email has been sent!"),
                                             actions: [
-                                              FlatButton(
-                                                onPressed: () {
+                                              GestureDetector(
+                                                onTap: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: Text("OK!"),
+                                                child: Container(
+                                                  width: 30,
+                                                  height: 30,
+                                                  child: Text("Ok!"),
+                                                ),
                                               ),
                                             ],
                                           );
